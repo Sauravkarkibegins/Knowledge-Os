@@ -15,7 +15,7 @@ if query :
   results = collection.query(
     query_embeddings=[embedding],
     n_results=3
-) 
+ ) 
 
   st.write(f"Answer : {results["documents"]}")
 
