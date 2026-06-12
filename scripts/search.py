@@ -1,18 +1,23 @@
 from sentence_transformers import SentenceTransformer
 import chromadb
+import streamlit as st
 
 model = SentenceTransformer('all-MiniLM-L6-v2')
 
 client = chromadb.PersistentClient(path="./database")
 collection = client.get_collection("notes")
 
-query = input("Search: ")
+query = st.text_input("Search: ")
 
-embedding = model.encode(query).tolist()
+if query :
+  embedding = model.encode(query).tolist()
 
-results = collection.query(
+  results = collection.query(
     query_embeddings=[embedding],
     n_results=3
-)
+) 
 
-print(results["documents"])
+  st.write(f"Answer : {results["documents"]}")
+
+else :
+  st.info('No query')

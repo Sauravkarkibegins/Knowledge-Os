@@ -9,7 +9,7 @@ response = ollama.chat(
     model="llama3",
     messages=[
         {
-            "role": "user",
+            "role": "system",
             "content": f"""
 Use this knowledge:
 {context}
